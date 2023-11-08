@@ -32,6 +32,10 @@ public class Team {
         return players;
     }
 
+    public Player getGoalie() {
+        return goalkeeper;
+    }
+
     public String getName() {
         return name;
     }
