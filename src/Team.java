@@ -21,7 +21,7 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team has a rating of " + teamRating;
+        return name + " (" + teamRating + ") ";
     }
 
     public int getTeamRating() {

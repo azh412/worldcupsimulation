@@ -16,9 +16,9 @@ public class Game {
         int ratingsSum = home.getTeamRating() + away.getTeamRating();
         Team possession;
         int zone = 0;
-        String[] goalAdj = {"wonderful", "beautiful", "incredible", "jaw-dropping"};
-        String[] goalType = {"top-corner", "bottom-corner"};
-        String[] goalSpeed = {"rocket", "curved ball", "attempted cross", "knuckle-ball", "tap-in"};
+        String[] goalAdj = {"wonderful ", "beautiful ", "incredible ", "jaw-dropping "};
+        String[] goalType = {"top-corner ", "bottom-corner "};
+        String[] goalSpeed = {"rocket ", "power shot ", "curved ball ", "attempted cross ", "knuckle-ball ", "tap-in "};
         for(int i = 0; i <= 90; i++){
             if(i == 0){
                 if((int)((Math.random()) * 2) == 0){
@@ -31,11 +31,11 @@ public class Game {
                     possession = away;
                     zone = 3;
                 }
-                script += "(0') Whistle blown, " + coinToss.getName() + "kicks off.\n";
+                script += "(0') Whistle blown, " + coinToss.getName() + " kicks off.\n";
                 continue;
             }
             if(i == 45){
-                script += "(45') Halftime.";
+                script += "(45') Halftime.\n";
                 possession = null;
                 continue;
             }
@@ -48,7 +48,7 @@ public class Game {
                 else{
                     zone = 2;
                 }
-                script += starting.getName() + " starts off the second half.\n";
+                script += "(46') " + starting.getName() + " starts off the second half.\n";
                 possession = starting;
                 continue;
             }
@@ -61,15 +61,18 @@ public class Game {
             }
             if(zone == 1){
                 if((int)(Math.random() * 4) == 3){
+                    awayPoints++;
                     script += "(" + String.valueOf(i) + "') GOAL!!! " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "scores a " + goalAdj[(int)(Math.random() * goalAdj.length)] + goalType[(int)(Math.random() * goalType.length)] + goalSpeed[(int)(Math.random() * goalSpeed.length)] + "\n";
                 }
             }
             else if(zone == 5){
                 if((int)(Math.random() * 4) == 3){
-                    script += "(" + String.valueOf(i) + "') GOAL!!! " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "scores a " + goalAdj[(int)(Math.random() * goalAdj.length)] + goalType[(int)(Math.random() * goalType.length)] + goalSpeed[(int)(Math.random() * goalSpeed.length)];
+                    homePoints++;
+                    script += "(" + String.valueOf(i) + "') GOAL!!! " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "scores a " + goalAdj[(int)(Math.random() * goalAdj.length)] + goalType[(int)(Math.random() * goalType.length)] + goalSpeed[(int)(Math.random() * goalSpeed.length)] + "\n";
                 }
             }
         }
+        script += "(90') Game over.\n\n" + String.valueOf(home) + String.valueOf(homePoints) + "-" + String.valueOf(awayPoints) + " " + String.valueOf(away);
     }
 
     @Override

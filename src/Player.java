@@ -27,6 +27,6 @@ public class Player {
 
     @Override
     public String toString() {
-        return "Player " + name + " has a rating of " + String.valueOf(rating);
+        return name + " (" + String.valueOf(rating) + ") ";
     }
 }
