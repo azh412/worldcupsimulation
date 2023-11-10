@@ -63,49 +63,73 @@ public class Game {
             }
             if(zone == 1){
                 if(possession == away) {
-                    if ((int) (Math.random() * 4) == 3) {
+                    Player shooter = away.getPlayers().get((int) (Math.random() * away.getPlayers().size()));
+                    if ((int) (Math.random() * 56) >= shooter.getRating()) {
                         awayPoints++;
-                        script += "(" + String.valueOf(i) + "') GOAL!!! " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "scores a " + goalAdj[(int) (Math.random() * goalAdj.length)] + goalType[(int) (Math.random() * goalType.length)] + goalSpeed[(int) (Math.random() * goalSpeed.length)] + "\n";
+                        script += "(" + String.valueOf(i) + "') GOAL!!! " + shooter + "scores a " + goalAdj[(int) (Math.random() * goalAdj.length)] + goalType[(int) (Math.random() * goalType.length)] + goalSpeed[(int) (Math.random() * goalSpeed.length)] + "\n";
                         zone = 2;
                         script += "(" + String.valueOf(i + 1) + "') " + away.getName() + " starts off with the ball.\n";
                         possession = home;
                         i++;
                         continue;
                     }
+                    else{
+                        String[] missedLines = {"gets his shot rejected by ", "'s miss wows the crowd. Ball is kicked up by ", "ALMOST MAKES IT! INCREDIBLE SAVE BY ", "shoots for the stars. Ball kicked up by ", "'s shot picked up by ", "'s dribble stopped by "};
+                        possession = home;
+                        zone += 2;
+                        script += "(" + String.valueOf(i) + "') " + shooter + missedLines[(int) (Math.random() * missedLines.length)] + home.getGoalie() + "\n";
+                    }
                 }
                 else{
-                    script += "(" + String.valueOf(i) + "') " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "passes it back to " + away.getGoalie() + " who kicks the ball up.";
+                    script += "(" + String.valueOf(i) + "') " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "passes it back to " + home.getGoalie() + "who kicks the ball up.\n";
                     zone += 2;
                 }
             }
             else if(zone == 5){
                 if(possession == home) {
-                    if ((int) (Math.random() * 4) == 3) { //todo: choose random player and make probability player based
+                    Player shooter = home.getPlayers().get((int) (Math.random() * home.getPlayers().size()));
+                    if ((int) (Math.random() * 55.5) >= shooter.getRating()) {
                         homePoints++;
-                        script += "(" + String.valueOf(i) + "') GOAL!!! " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "scores a " + goalAdj[(int) (Math.random() * goalAdj.length)] + goalType[(int) (Math.random() * goalType.length)] + goalSpeed[(int) (Math.random() * goalSpeed.length)] + "\n";
+                        script += "(" + String.valueOf(i) + "') GOAL!!! " + shooter + "scores a " + goalAdj[(int) (Math.random() * goalAdj.length)] + goalType[(int) (Math.random() * goalType.length)] + goalSpeed[(int) (Math.random() * goalSpeed.length)] + "\n";
                         zone = 3;
-                        script += "(" + String.valueOf(i + 1) + "') " + home.getName() + " starts off with the ball.";
+                        script += "(" + String.valueOf(i + 1) + "') " + home.getName() + " starts off with the ball.\n";
                         possession = away;
                         i++;
                         continue;
                     }
+                    else{
+                        String[] missedLines = {"gets his shot rejected by ", "'s miss wows the crowd. Ball is kicked up by ", "ALMOST MAKES IT! INCREDIBLE SAVE BY ", "shoots for the stars. Ball kicked up by ", "'s shot picked up by ", "'s dribble stopped by "};
+                        possession = away;
+                        zone += 2;
+                        script += "(" + String.valueOf(i) + "') " + shooter + missedLines[(int) (Math.random() * missedLines.length)] + away.getGoalie() + "\n";
+                    }
                 }
                 else{
-                    script += "(" + String.valueOf(i) + "') " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "passes it back to " + home.getGoalie() + " who kicks the ball up.";
+                    script += "(" + String.valueOf(i) + "') " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "passes it back to " + away.getGoalie() + "who kicks the ball up.\n";
                     zone += 2;
                 }
             }
             else {
                 if(up){
                     if(possession == away){
-                        if((int)((Math.random()) * 2) == 0){
-                            int x;
-                        }
+                        //todo: 75% chance of retaining ball, if not retained then switch possession with a message with tackle or interception
+                        script += "(" + String.valueOf(i) + "') " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "passes it back to " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "\n";
+                    }
+                }
+                else{
+                    if(possession == home){
+                        script += "(" + String.valueOf(i) + "') " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "passes it back to " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "\n";
                     }
                 }
             }
         }
         script += "(90') Game over.\n\n" + String.valueOf(home) + String.valueOf(homePoints) + "-" + String.valueOf(awayPoints) + " " + String.valueOf(away);
+    }
+    public void readScript() throws InterruptedException {
+        for(String line : script.split("\n")){
+            System.out.println(line);
+            Thread.sleep(700);
+        }
     }
 
     @Override

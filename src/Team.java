@@ -13,9 +13,9 @@ public class Team {
             players.add(p);
             ratingSum += p.getRating();
         }
-        Player gk = new Player();
+        Player gk = new Player(true);
         goalkeeper = gk;
-        ratingSum += gk.getRating();
+        ratingSum += gk.getRating()*2;
         teamRating = ratingSum;
     }
 

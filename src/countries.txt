@@ -1,0 +1,50 @@
+Brazil	BRA
+Argentina	ARG
+France	FRA
+England	ENG
+Portugal	POR
+Spain	ESP
+Belgium	BEL
+Netherlands	NED
+Italy	ITA
+Germany	GER
+Denmark	DEN
+Morocco	MAR
+Colombia	COL
+Croatia	CRO
+Japan	JPN
+Senegal	SEN
+Uruguay	URU
+Switzerland	SUI
+Algeria	ALG
+United States	USA
+Tunisia	TUN
+Ivory Coast	CIV
+Cameroon	CMR
+Serbia	SRB
+Egypt	EGY
+Mexico	MEX
+Mali	MLI
+Canada	CAN
+Poland	POL
+Ecuador	ECU
+Hungary	HUN
+Australia	AUS
+Sweden	SWE
+Peru	PER
+Ukraine	UKR
+Austria	AUT
+Saudi Arabia	KSA
+Czech Republic	CZE
+Wales	WAL
+Scotland	SCO
+Chile	CHI
+Paraguay	PAR
+Republic of Ireland	IRL
+Nigeria	NGA
+South Korea	KOR
+Norway	NOR
+Turkey	TUR
+Iran	IRN
+Ghana	GHA
+Burkina Faso	BFA
