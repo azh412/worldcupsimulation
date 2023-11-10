@@ -14,7 +14,7 @@ public class Game {
     }
     public static void generateScript(){
         int ratingsSum = home.getTeamRating() + away.getTeamRating();
-        Team possession;
+        Team possession = null;
         int zone = 0;
         String[] goalAdj = {"wonderful ", "beautiful ", "incredible ", "jaw-dropping "};
         String[] goalType = {"top-corner ", "bottom-corner "};
@@ -67,7 +67,7 @@ public class Game {
                         awayPoints++;
                         script += "(" + String.valueOf(i) + "') GOAL!!! " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "scores a " + goalAdj[(int) (Math.random() * goalAdj.length)] + goalType[(int) (Math.random() * goalType.length)] + goalSpeed[(int) (Math.random() * goalSpeed.length)] + "\n";
                         zone = 2;
-                        script += "(" + String.valueOf(i + 1) + ") " + away.getName() + " starts off with the ball.";
+                        script += "(" + String.valueOf(i + 1) + "') " + away.getName() + " starts off with the ball.\n";
                         possession = home;
                         i++;
                         continue;
@@ -75,11 +75,12 @@ public class Game {
                 }
                 else{
                     script += "(" + String.valueOf(i) + "') " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "passes it back to " + away.getGoalie() + " who kicks the ball up.";
+                    zone += 2;
                 }
             }
             else if(zone == 5){
                 if(possession == home) {
-                    if ((int) (Math.random() * 4) == 3) {
+                    if ((int) (Math.random() * 4) == 3) { //todo: choose random player and make probability player based
                         homePoints++;
                         script += "(" + String.valueOf(i) + "') GOAL!!! " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "scores a " + goalAdj[(int) (Math.random() * goalAdj.length)] + goalType[(int) (Math.random() * goalType.length)] + goalSpeed[(int) (Math.random() * goalSpeed.length)] + "\n";
                         zone = 3;
@@ -91,13 +92,14 @@ public class Game {
                 }
                 else{
                     script += "(" + String.valueOf(i) + "') " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "passes it back to " + home.getGoalie() + " who kicks the ball up.";
+                    zone += 2;
                 }
             }
             else {
                 if(up){
                     if(possession == away){
                         if((int)((Math.random()) * 2) == 0){
-
+                            int x;
                         }
                     }
                 }
