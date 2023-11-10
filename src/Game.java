@@ -18,7 +18,7 @@ public class Game {
         int zone = 0;
         String[] goalAdj = {"wonderful ", "beautiful ", "incredible ", "jaw-dropping "};
         String[] goalType = {"top-corner ", "bottom-corner "};
-        String[] goalSpeed = {"rocket ", "power shot ", "curved ball ", "attempted cross ", "knuckle-ball ", "tap-in "};
+        String[] goalSpeed = {"rocket! ", "power shot! ", "curved ball! ", "attempted cross! ", "knuckle-ball! ", "tap-in! "};
         for(int i = 0; i <= 90; i++){
             if(i == 0){
                 if((int)((Math.random()) * 2) == 0){
