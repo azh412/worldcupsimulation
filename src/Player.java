@@ -2,7 +2,9 @@ public class Player {
     private final int rating;
     private final String name;
     private final boolean isGK;
-    public Player(){
+    private final Team team;
+    public Player(Team team){
+        this.team = team;
         String vowels = "aeiou";
         String consonants = "bcdfghjklmnprst";
         String n = "";
@@ -18,7 +20,8 @@ public class Player {
         this.name = n.substring(0,1).toUpperCase() + n.substring(1);
         isGK = false;
     }
-    public Player(boolean isGK){
+    public Player(Team team, boolean isGK){
+        this.team = team;
         String vowels = "aeiou";
         String consonants = "bcdfghjklmnprst";
         String n = "";
@@ -45,10 +48,13 @@ public class Player {
     @Override
     public String toString() {
         if(!isGK) {
-            return name + " (" + String.valueOf(rating) + ") ";
+            return name + " (" + team.getAbrv() + ") " + "(" + String.valueOf(rating) + ") ";
         }
         else {
-            return name + " (" + String.valueOf(rating) + ") (GK) ";
+            return name + " (" + team.getAbrv() + ") " + "(" + String.valueOf(rating) + ") (GK) ";
         }
+    }
+    public boolean equals(Player obj) {
+        return name.equals(obj.name);
     }
 }
