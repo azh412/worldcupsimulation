@@ -11,7 +11,6 @@ public class Game {
     public ArrayList<Game> TournamentGames = new ArrayList<Game>();
 
     public Game(Team homex, Team awayx) {
-        home = away = null;
         home = homex;
         away = awayx;
       //  AddGameToList(this);

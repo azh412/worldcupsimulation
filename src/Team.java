@@ -8,7 +8,6 @@ public class Team {
     private final String name;
     private final String abrv;
     public Team(String name, String abrv){
-      //  name = abrv = "";
         this.name = name;
         this.abrv = abrv;
         int ratingSum = 0;
