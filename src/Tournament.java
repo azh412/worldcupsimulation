@@ -1,9 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Scanner;
+import java.util.*;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -37,6 +35,7 @@ public class Tournament {
             e.printStackTrace();
         }
         ArrayList<Team> qualified_teams = new ArrayList<Team>();
+        Collections.shuffle(qualified_teams);
         for(int i = 0; i < 16; i++){
             Team random_team = teams.get((int) (Math.random() * teams.size()));
             while(qualified_teams.contains(random_team)) {
@@ -52,11 +51,14 @@ public class Tournament {
                 return Integer.compare(o1r, o2r);
             }
         });
-        System.out.println("Choose one of the tournament favorites to use for the World Cup.\nTournament Favorites: \n");
+        System.out.println("Choose one of the tournament favorites to use for the World Cup.\nTournament Favorites (unordered): \n");
         ArrayList<Team> favorites = new ArrayList<Team>();
         for(int i = 0; i < 5; i++){
-            System.out.println("[" + (i+1) + "]: " + qualified_teams.get(i).getName() + " (" + qualified_teams.get(i).getAbrv() + ")");
             favorites.add(qualified_teams.get(i));
+        }
+        Collections.shuffle(favorites);
+        for(int i = 0; i < 5; i++){
+            System.out.println("[" + (i+1) + "]: " + favorites.get(i).getName() + " (" + favorites.get(i).getAbrv() + ")");
         }
         Scanner scanner = new Scanner(System.in);
         System.out.print("\nEnter your pick! [1-5]: ");

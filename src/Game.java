@@ -77,7 +77,7 @@ public class Game {
                         i++;
                         continue;
                     } else {
-                        String[] missedLines = {"gets his shot rejected by ", "'s miss wows the crowd. Ball is kicked up by ", "ALMOST MAKES IT! INCREDIBLE SAVE BY ", "shoots for the stars. Ball kicked up by ", "'s shot picked up by ", "'s dribble stopped by "};
+                        String[] missedLines = {"gets his shot rejected by ", "made a miss and wows the crowd. Ball is kicked up by ", "ALMOST MAKES IT! INCREDIBLE SAVE BY ", "shoots for the stars. Ball kicked up by ", "'s shot picked up by ", "'s dribble stopped by "};
                         possession = home;
                         zone += 2;
                         script += "(" + String.valueOf(i) + "') " + shooter + missedLines[(int) (Math.random() * missedLines.length)] + home.getGoalie() + "\n";
@@ -100,7 +100,7 @@ public class Game {
                         i++;
                         continue;
                     } else {
-                        String[] missedLines = {"gets his shot rejected by ", "'s miss wows the crowd. Ball is kicked up by ", "ALMOST MAKES IT! INCREDIBLE SAVE BY ", "shoots for the stars. Ball kicked up by ", "'s shot picked up by ", "'s dribble stopped by "};
+                        String[] missedLines = {"gets his shot rejected by ", "made a miss and wows the crowd. Ball is kicked up by ", "ALMOST MAKES IT! INCREDIBLE SAVE BY ", "shoots for the stars. Ball kicked up by ", "'s shot picked up by ", "'s dribble stopped by "};
                         possession = away;
                         zone += 2;
                         script += "(" + String.valueOf(i) + "') " + shooter + missedLines[(int) (Math.random() * missedLines.length)] + away.getGoalie() + "\n";
@@ -113,13 +113,69 @@ public class Game {
             } else {
                 if (up) {
                     if (possession == away) {
-                        //todo: bad team, bad chances, but 75% chance of retaining ball, if not retained then switch possession with a message with tackle or interception
-                        script += "(" + String.valueOf(i) + "') " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "passes it back to " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "\n";
+                        if((int)(Math.random() * (5)) == 3){ //todo: bad team bad chances
+                            String[] taken = {"takes the ball with a successful jockey", "slide tackles from the front to win possession", "intercepts a pass beautifully", "sticks his foot out to win possession", "gets the ball practically passed to him"};
+                            possession = home;
+                            script += "(" + String.valueOf(i) + "') " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + taken[(int) (Math.random() * taken.length)] + "\n";
+                        }
+                        else{
+                            script += "(" + String.valueOf(i) + "') " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "passes it back to " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + "\n";
+                        }
                     }
-                    //todo: pushing up
+                    else{
+                        if((int)(Math.random() * (4)) != 2){
+                            if ((int) ((Math.random()) * 2) == 0) {
+                                String[] dribbles = {"dribbles it forward", "powers it forward", "sprints with the ball"};
+                                script += "(" + String.valueOf(i) + "') " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + dribbles[(int) (Math.random() * dribbles.length)] + "\n";
+                            }
+                            else{
+                                String[] passes = {"puts a through-ball to ", "passes it to ", "lobs it to ", "pings the ball to "};
+                                Player passer = home.getPlayers().get((int) (Math.random() * home.getPlayers().size()));
+                                Player receiver = home.getPlayers().get((int) (Math.random() * home.getPlayers().size()));
+                                while(passer.equals(receiver)){
+                                    receiver = home.getPlayers().get((int) (Math.random() * home.getPlayers().size()));
+                                }
+                                script += "(" + String.valueOf(i) + "') " + passer + passes[(int) (Math.random() * passes.length)] + receiver + "\n";
+                            }
+                        }
+                        else{
+                            String[] taken = {"takes the ball with a successful jockey", "slide tackles from the front to win possession", "intercepts a pass beautifully", "sticks his foot out to win possession", "gets the ball practically passed to him"};
+                            possession = away;
+                            script += "(" + String.valueOf(i) + "') " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + taken[(int) (Math.random() * taken.length)] + "\n";
+                        }
+                    }
                 } else {
                     if (possession == home) {
-                        script += "(" + String.valueOf(i) + "') " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "passes it back to " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "\n";
+                        if((int)(Math.random() * (5)) == 3){ //todo: bad team bad chances
+                            String[] taken = {"takes the ball with a successful jockey", "slide tackles from the front to win possession", "intercepts a pass beautifully", "sticks his foot out to win possession", "gets the ball practically passed to him"};
+                            possession = home;
+                            script += "(" + String.valueOf(i) + "') " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + taken[(int) (Math.random() * taken.length)] + "\n";
+                        }
+                        else{
+                            script += "(" + String.valueOf(i) + "') " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "passes it back to " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + "\n";
+                        }
+                    }
+                    else{
+                        if((int)(Math.random() * (4)) != 2){
+                            if ((int) ((Math.random()) * 2) == 0) {
+                                String[] dribbles = {"dribbles it forward", "powers it forward", "sprints with the ball"};
+                                script += "(" + String.valueOf(i) + "') " + away.getPlayers().get((int) (Math.random() * away.getPlayers().size())) + dribbles[(int) (Math.random() * dribbles.length)] + "\n";
+                            }
+                            else{
+                                String[] passes = {"puts a through-ball to ", "passes it to ", "lobs it to ", "pings the ball to "};
+                                Player passer = away.getPlayers().get((int) (Math.random() * away.getPlayers().size()));
+                                Player receiver = away.getPlayers().get((int) (Math.random() * away.getPlayers().size()));
+                                while(passer.equals(receiver)){
+                                    receiver = away.getPlayers().get((int) (Math.random() * away.getPlayers().size()));
+                                }
+                                script += "(" + String.valueOf(i) + "') " + passer + passes[(int) (Math.random() * passes.length)] + receiver + "\n";
+                            }
+                        }
+                        else{
+                            String[] taken = {"takes the ball with a successful jockey", "slide tackles from the front to win possession", "intercepts a pass beautifully", "sticks his foot out to win possession", "gets the ball practically passed to him"};
+                            possession = home;
+                            script += "(" + String.valueOf(i) + "') " + home.getPlayers().get((int) (Math.random() * home.getPlayers().size())) + taken[(int) (Math.random() * taken.length)] + "\n";
+                        }
                     }
                 }
             }
