@@ -15,14 +15,18 @@ public class Game {
         away = awayx;
       //  AddGameToList(this);
         generateScript();
+        while(homePoints == awayPoints){
+            generateScript();
+        }
     }
     public void generateScript() {
+        script = "";
         int ratingsSum = home.getTeamRating() + away.getTeamRating();
         Team possession = null;
         int zone = 0;
-        String[] goalAdj = {"wonderful ", "beautiful ", "incredible ", "jaw-dropping "};
+        String[] goalAdj = {"wonderful ", "beautiful ", "incredible ", "jaw-dropping ", "stunning "};
         String[] goalType = {"top-corner ", "bottom-corner "};
-        String[] goalSpeed = {"rocket! ", "power shot! ", "curved ball! ", "attempted cross! ", "knuckle-ball! ", "tap-in! "};
+        String[] goalSpeed = {"rocket! ", "power shot! ", "curved ball! ", "attempted cross! ", "knuckle-ball! ", "tap-in! ", "backheel! ", "rebound! "};
         for (int i = 0; i <= 90; i++) {
             if (i == 0) {
                 if ((int) ((Math.random()) * 2) == 0) {
@@ -180,8 +184,8 @@ public class Game {
                 }
             }
         }
-        script += "(90') Game over.\n\n" + String.valueOf(home) + String.valueOf(homePoints) + "-" + String.valueOf(awayPoints) + " " + String.valueOf(away);
-        keyEvents.add("(90') Game over.\n\n" + String.valueOf(home) + String.valueOf(homePoints) + "-" + String.valueOf(awayPoints) + " " + String.valueOf(away));
+        script += "(90') Game over.\n\n" + String.valueOf(home) + String.valueOf(homePoints) + "-" + String.valueOf(awayPoints) + " " + String.valueOf(away) + "\n\n\n";
+        keyEvents.add("(90') Game over.\n\n" + String.valueOf(home) + String.valueOf(homePoints) + "-" + String.valueOf(awayPoints) + " " + String.valueOf(away) + "\n\n\n");
     }
 
     public void readScript() {

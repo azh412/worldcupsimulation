@@ -76,7 +76,6 @@ public class Tournament {
         qualified_teams.remove(choice_matchup);
         Game pgame = new Game(choice,choice_matchup);
         matchups.add(pgame);
-        pgame = null;
         for(int i = 0; i < qualified_teams.size(); i+=2) {
             pgame = null;
             Team a = qualified_teams.get(i);
@@ -87,6 +86,7 @@ public class Tournament {
         for(Game matchup: matchups) {
             if(matchup.getHome() == choice){
                 pgame = matchup;
+                break;
             }
         }
         System.out.println("You chose " + choice.getName() + " with a rating of " + choice.getTeamRating());
@@ -95,15 +95,57 @@ public class Tournament {
             System.out.println(player);
         }
         System.out.println("GK: " + choice.getGoalie()+"\n");
-        System.out.println(choice + "is playing " + choice_matchup.toString());
-        System.out.print("\nSimulate or play game? (s, p): ");
-        String playsimchoice = scanner.nextLine();
-        if(playsimchoice.equals("s")){
-            pgame.simulateScript();
+        int round = 1;
+        String roundStr = "Round of 16";
+        while(true) {
+            System.out.println(choice + "is playing " + choice_matchup.toString() + "in the " + roundStr);
+            System.out.print("\nSimulate or play game? (s, p): ");
+            String playsimchoice = scanner.nextLine();
+            if (playsimchoice.equals("s")) {
+                pgame.simulateScript();
+            } else {
+                pgame.readScript();
+            }
+            ArrayList<Team> winners = new ArrayList<Team>();
+            for (Game match : matchups) {
+                winners.add(match.getWinner());
+            }
+            if (!pgame.getWinner().equals(choice)) {
+                System.out.println("You got eliminated in the " + roundStr + " by " + choice_matchup.getName() + ". \nDo you think you could do better?");
+                return;
+            }
+            if(round == 4){
+                System.out.println("Congratulations! You have won the World Cup!\nDo you think you can win with another team?");
+                return;
+            }
+            matchups = new ArrayList<Game>();
+            for (int i = 0; i < winners.size(); i += 2) {
+                pgame = null;
+                Team a = winners.get(i);
+                Team b = winners.get(i + 1);
+                pgame = new Game(a, b);
+                matchups.add(pgame);
+            }
+            for (Game matchup : matchups) {
+                if (matchup.getHome().equals(choice) || matchup.getAway().equals(choice)) {
+                    pgame = matchup;
+                    if (matchup.getAway().equals(choice)){
+                        choice_matchup = matchup.getHome();
+                    }
+                    else{
+                        choice_matchup = matchup.getAway();
+                    }
+                    break;
+                }
+            }
+            round++;
+            if (round == 2) {
+                roundStr = "Quarter-finals";
+            } else if (round == 3) {
+                roundStr = "Semi-finals";
+            } else {
+                roundStr = "Finals";
+            }
         }
-        else{
-            pgame.readScript();
-        }
-
     }
 }
